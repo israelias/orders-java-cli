@@ -5,6 +5,7 @@ import com.example.order.util.Database;
 import com.example.order.util.ExceptionHandler;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.*;
 
@@ -12,7 +13,7 @@ import java.sql.*;
  * DAO to get the total of all the paid orders of a customer
  */
 public class TotalOrderDao {
-    private final String query = "{call GET_PAID_ORDER_TOTAL_FROM_CUSTOMER(?)}";
+    private final static String query = "{call GET_PAID_ORDER_TOTAL_FROM_CUSTOMER(?)}";
     private final Database database;
 
     /**
@@ -30,7 +31,7 @@ public class TotalOrderDao {
      * @param paramsDto Object with the arguments of the operation
      * @return Total of all paid orders
      */
-    public BigDecimal getTotalAllPaidOrders(ParamsDto paramsDto) {
+    public BigDecimal getTotalAllPaidOrders(ParamsDto paramsDto) throws SQLException, IOException {
         BigDecimal result = null;
 
         try (Connection con = database.getConnection();

@@ -5,6 +5,7 @@ import com.example.order.util.Database;
 import com.example.order.util.ExceptionHandler;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -13,7 +14,6 @@ import java.sql.SQLException;
  * DAO to update an order
  */
 public class UpdateOrderDao {
-    private final String query = "UPDATE orders o SET o.order_status = ? WHERE o.order_id = ?";
     private final Database database;
 
     /**
@@ -31,7 +31,7 @@ public class UpdateOrderDao {
      * @param paramsDto Object with the parameters for the operation
      * @return Number of affected rows
      */
-    public int updateOrderStatus(ParamsDto paramsDto) {
+    public int updateOrderStatus(ParamsDto paramsDto) throws IOException {
         int numberResults = 0;
 
         try (Connection con = database.getConnection();
@@ -55,6 +55,7 @@ public class UpdateOrderDao {
      * @throws SQLException In case of an error
      */
     private @NotNull PreparedStatement createPreparedStatement(@NotNull Connection con, @NotNull ParamsDto paramsDto) throws SQLException {
+        String query = "UPDATE orders o SET o.order_status = ? WHERE o.order_id = ?";
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, paramsDto.getStatus());
         ps.setLong(2, paramsDto.getOrderId());

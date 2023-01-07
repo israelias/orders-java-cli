@@ -1,7 +1,5 @@
 package com.example.order.util;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.sql.SQLException;
 
 /**
@@ -14,7 +12,7 @@ public class ExceptionHandler {
      *
      * @param sqlException Exception from which information will be extracted
      */
-    public static void handleException(@NotNull SQLException sqlException) {
+    public static void handleException(SQLException sqlException) {
         System.out.println(sqlException.getErrorCode());
         System.out.println(sqlException.getSQLState());
         System.out.println(sqlException.getMessage());

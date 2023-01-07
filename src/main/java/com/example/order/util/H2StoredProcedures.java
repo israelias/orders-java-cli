@@ -27,8 +27,10 @@ public class H2StoredProcedures {
 
         PreparedStatement ps = conn.prepareStatement(sql.toString());
         ResultSet results = ps.executeQuery();
-        while (results.next())
+
+        while (results.next()) {
             joiner.add(results.getString("order_id"));
+        }
 
         sql = new StringBuilder();
         sql.append("SELECT SUM( MULT(product_price, order_detail_quantity) ) FROM order_details, products ");

@@ -6,6 +6,7 @@ import com.example.order.util.Database;
 import com.example.order.util.ExceptionHandler;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,7 +17,7 @@ import java.sql.SQLException;
  * DAO to get an order
  */
 public class GetOrderDao {
-    private final String query = "SELECT * FROM orders o WHERE o.order_id = ?";
+    private final static String query = "SELECT * FROM orders o WHERE o.order_id = ?";
     private final Database database;
 
     /**
@@ -53,8 +54,8 @@ public class GetOrderDao {
                 orderDto.setStatus(rs.getString(4));
             }
 
-        } catch (SQLException ex) {
-            ExceptionHandler.handleException(ex);
+        } catch (SQLException | IOException ex) {
+            ExceptionHandler.handleException((SQLException) ex);
         }
 
         return orderDto;

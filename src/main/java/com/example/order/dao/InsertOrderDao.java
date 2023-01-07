@@ -7,6 +7,7 @@ import com.example.order.util.ExceptionHandler;
 import com.example.order.util.OrderStatus;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDateTime;
 
@@ -38,7 +39,7 @@ public class InsertOrderDao {
      * @param orderDto Object with the information to insert
      * @return The ID of the order inserted
      */
-    public long insertOrder(OrderDto orderDto) {
+    public long insertOrder(OrderDto orderDto) throws IOException {
         long orderId = -1;
 
         try (Connection con = database.getConnection();

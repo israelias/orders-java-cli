@@ -100,8 +100,7 @@ public class DatabaseTest {
             con.close();
         } catch (Exception e) {
             //e.printStackTrace();
-            assertTrue("The connection is not valid. The method `getConnection()` threw an exception. Make sure you're opening the connection with the right parameters.",
-                    false);
+            fail("The connection is not valid. The method `getConnection()` threw an exception. Make sure you're opening the connection with the right parameters.");
         }
     }
 }

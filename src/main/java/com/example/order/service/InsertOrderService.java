@@ -5,6 +5,8 @@ import com.example.order.dto.ParamsDto;
 import com.example.order.util.Database;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+
 /**
  * Service class to insert an order
  */
@@ -17,7 +19,7 @@ public class InsertOrderService implements OrderService {
      * @param paramsDTO Object with the parameters to execute the service
      */
     @Override
-    public String execute(@NotNull ParamsDto paramsDTO) {
+    public String execute(@NotNull ParamsDto paramsDTO) throws IOException {
         String result;
         long orderId = insertOrderDao.insertOrder(paramsDTO.getOrder());
 

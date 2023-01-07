@@ -4,6 +4,8 @@ import com.example.order.dao.DeleteOrderDao;
 import com.example.order.dto.ParamsDto;
 import com.example.order.util.Database;
 
+import java.io.IOException;
+
 /**
  * Service class to delete one or more orders
  */
@@ -16,7 +18,7 @@ public class DeleteOrderService implements OrderService {
      * @param paramsDTO Object with the parameters to execute the service
      */
     @Override
-    public String execute(ParamsDto paramsDTO) {
+    public String execute(ParamsDto paramsDTO) throws IOException {
         String result;
         int rowsAffected = deleteOrderDao.deleteOrdersById(paramsDTO);
 

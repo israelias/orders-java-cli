@@ -4,7 +4,9 @@ import com.example.order.dao.TotalOrderDao;
 import com.example.order.dto.ParamsDto;
 import com.example.order.util.Database;
 
+import java.io.IOException;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 
 /**
  * Service class to get the total of the orders of a customer
@@ -18,7 +20,7 @@ public class TotalOrderService implements OrderService {
      * @param paramsDTO Object with the parameters to execute the service
      */
     @Override
-    public String execute(ParamsDto paramsDTO) {
+    public String execute(ParamsDto paramsDTO) throws IOException, SQLException {
         String result;
         BigDecimal total = totalOrderDao.getTotalAllPaidOrders(paramsDTO);
 
