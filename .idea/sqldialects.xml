@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="SqlDialectMappings">
-    <file url="file://$PROJECT_DIR$/src/main/java/com/example/order/dao/GetOrderDao.java" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/order/dao/GetOrderDao.java" dialect="H2" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/order/dao/InsertOrderDao.java" dialect="H2" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/order/dao/TotalOrderDao.java" dialect="H2" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/example/order/dao/UpdateOrderDao.java" dialect="H2" />
     <file url="file://$PROJECT_DIR$/src/main/resources/db.sql" dialect="H2" />
   </component>
 </project>
