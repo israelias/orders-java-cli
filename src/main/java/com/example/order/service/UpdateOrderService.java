@@ -4,6 +4,8 @@ import com.example.order.dao.UpdateOrderDao;
 import com.example.order.dto.ParamsDto;
 import com.example.order.util.Database;
 
+import java.io.IOException;
+
 /**
  * Service class to update an order
  */
@@ -16,7 +18,7 @@ public class UpdateOrderService implements OrderService {
      * @param paramsDTO Object with the parameters to execute the service
      */
     @Override
-    public String execute(ParamsDto paramsDTO) {
+    public String execute(ParamsDto paramsDTO) throws IOException {
         String result;
         int rowsAffected = updateOrderDao.updateOrderStatus(paramsDTO);
 

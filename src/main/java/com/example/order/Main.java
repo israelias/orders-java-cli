@@ -13,6 +13,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,11 +33,10 @@ public class Main {
      *
      * @param args Command and arguments to be interpreted by the application
      */
-    public static void main(String[] args) {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        String command = "";
+    public static void main(String[] args) throws SQLException, IOException {
 
-        try {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            String command = "";
             while (!Commands.EXIT.getCmd().equalsIgnoreCase(command)) {
                 System.out.print(INITIAL_PROMPT);
                 String line = reader.readLine();
@@ -63,7 +63,7 @@ public class Main {
      *
      * @param args Arguments given to the application
      */
-    private static void processCommand(String[] args) {
+    private static void processCommand(String[] args) throws SQLException, IOException {
         String error = validateArgs(args);
 
         if (isEmpty(error)) {
@@ -120,10 +120,9 @@ public class Main {
      */
     private static @NotNull OrderDto askForOrderDetails() {
         OrderDto orderDTO = new OrderDto();
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        boolean invalidInput;
-        try {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+            boolean invalidInput;
             /* Ask for customer ID */
             do {
                 System.out.print("Customer ID: ");
@@ -141,7 +140,7 @@ public class Main {
             do {
                 OrderDetailDto orderDetailDTO = new OrderDetailDto();
 
-                // Ask for product ID
+                /* Ask for product ID */
                 do {
                     System.out.print("Product ID: ");
                     String line = reader.readLine();

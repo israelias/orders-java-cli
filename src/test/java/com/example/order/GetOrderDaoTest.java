@@ -1,5 +1,6 @@
 package com.example.order;
 
+import java.io.IOException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -35,7 +36,7 @@ public class GetOrderDaoTest {
     }
 
     @Test
-    public void shouldCreateDatabaseConnection() throws SQLException {
+    public void shouldCreateDatabaseConnection() throws SQLException, IOException {
         when(databaseMock.getConnection()).thenReturn(databaseInstance.getConnection());
 
         GetOrderDao getOrderDao = new GetOrderDao(databaseMock);

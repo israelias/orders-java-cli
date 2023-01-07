@@ -1,5 +1,6 @@
 package com.example.order;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.sql.*;
@@ -54,7 +55,7 @@ public class InsertOrderDaoTest {
     }
 
     @Test
-    public void shouldGetConnectionObject() throws SQLException {
+    public void shouldGetConnectionObject() throws SQLException, IOException {
         Database databaseMock = Mockito.mock(Database.class);
         when(databaseMock.getConnection()).thenReturn(databaseInstance.getConnection());
 

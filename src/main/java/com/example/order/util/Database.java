@@ -2,6 +2,7 @@ package com.example.order.util;
 
 import org.h2.tools.RunScript;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Connection;
@@ -10,19 +11,25 @@ import java.sql.SQLException;
 
 /**
  * Singleton class to get database connections
+ *
+ * @link https://en.wikipedia.org/wiki/Initialization-on-demand_holder_idiom
  */
 public class Database {
     private static Database instance = null;
     private static boolean isInitialized = false;
 
-    private final String url = "jdbc:h2:mem:orders;DB_CLOSE_DELAY=-1";
-    private final String user = "sa";
-    private final String password = "";
+    private static final String url = "jdbc:h2:mem:orders;DB_CLOSE_DELAY=-1";
+    private static final String user = "sa";
+    private static final String password = "";
 
     /**
      * Private constructor
      */
     private Database() {
+    }
+
+    private static class LazyHolder {
+        static final Database INSTANCE = new Database();
     }
 
     /**
@@ -32,7 +39,7 @@ public class Database {
      */
     public static Database getInstance() {
         if (instance == null) {
-            instance = new Database();
+            instance = LazyHolder.INSTANCE;
         }
         return instance;
     }
@@ -42,7 +49,7 @@ public class Database {
      *
      * @param connection Object that represents a connection to the database
      */
-    private static void initializeDatabase(Connection connection) {
+    private static void initializeDatabase(Connection connection) throws IOException {
         try {
             InputStream is = Database.class.getResourceAsStream("/db.sql");
             assert is != null;
@@ -58,7 +65,7 @@ public class Database {
      * @return A connection object
      * @throws SQLException In case of a database error
      */
-    public Connection getConnection() throws SQLException {
+    public Connection getConnection() throws SQLException, IOException {
         Connection connection = DriverManager.getConnection(url, user, password);
 
         if (!isInitialized && connection != null) {

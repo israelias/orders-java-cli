@@ -5,6 +5,7 @@ import com.example.order.util.Database;
 import com.example.order.util.ExceptionHandler;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -32,7 +33,7 @@ public class DeleteOrderDao {
      * @param paramsDto Object with the parameters for the operation
      * @return Number of orders deleted
      */
-    public int deleteOrdersById(@NotNull ParamsDto paramsDto) {
+    public int deleteOrdersById(@NotNull ParamsDto paramsDto) throws IOException {
         int numberResults = 0;
 
         try (Connection con = database.getConnection();

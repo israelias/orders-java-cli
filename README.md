@@ -191,3 +191,5 @@ using prepared statement.
 - [Design_Patterns_In_Java_CRUD](https://github.com/naman14310/Design_Patterns_In_Java_CRUD)
 - [Database Normalization](http://extreme-java.blogspot.com/2014/05/database-normalization.html)
 - [Database Interaction with DAO and DTO Design Patterns](https://dzone.com/articles/database-interaction-dao-and)
+- [`try`-with-resources](https://en.wikipedia.org/wiki/Java_syntax#try-with-resources_statements)
+- [tryResourceClose](https://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html)
