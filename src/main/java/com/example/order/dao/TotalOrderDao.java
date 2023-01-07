@@ -3,6 +3,7 @@ package com.example.order.dao;
 import com.example.order.dto.ParamsDto;
 import com.example.order.util.Database;
 import com.example.order.util.ExceptionHandler;
+import org.jetbrains.annotations.NotNull;
 
 import java.math.BigDecimal;
 import java.sql.*;
@@ -11,8 +12,8 @@ import java.sql.*;
  * DAO to get the total of all the paid orders of a customer
  */
 public class TotalOrderDao {
-    private String query = "{call GET_PAID_ORDER_TOTAL_FROM_CUSTOMER(?)}";
-    private Database database;
+    private final String query = "{call GET_PAID_ORDER_TOTAL_FROM_CUSTOMER(?)}";
+    private final Database database;
 
     /**
      * Constructor
@@ -53,12 +54,12 @@ public class TotalOrderDao {
     /**
      * Creates a CallableStatement object to get the total of the orders
      *
-     * @param con        Connnection object
+     * @param con        Connection object
      * @param customerId ID of the customer to set on the PreparedStatement
      * @return A PreparedStatement object
      * @throws SQLException In case of an error
      */
-    private CallableStatement createCallableStatement(Connection con, long customerId) throws SQLException {
+    private @NotNull CallableStatement createCallableStatement(@NotNull Connection con, long customerId) throws SQLException {
         CallableStatement cs = con.prepareCall(query);
         cs.setLong(1, customerId);
 

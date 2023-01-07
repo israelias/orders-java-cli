@@ -57,6 +57,13 @@
             <version>2.22.2</version>
             <scope>test</scope>
         </dependency>
+        <!-- JETBRAINS ANNOTATION  -->
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

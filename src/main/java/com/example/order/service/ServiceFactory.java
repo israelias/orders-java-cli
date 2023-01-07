@@ -1,6 +1,7 @@
 package com.example.order.service;
 
 import com.example.order.util.Commands;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Factory class to get a service instance
@@ -9,10 +10,11 @@ public class ServiceFactory {
 
     /**
      * Gets the correct service class according to the give command
+     *
      * @param cmdEnum Command
      * @return Service class
      */
-    public static OrderService get(Commands cmdEnum) {
+    public static OrderService get(@NotNull Commands cmdEnum) {
         OrderService service;
 
         switch (cmdEnum) {

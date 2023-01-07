@@ -3,6 +3,7 @@ package com.example.order.dao;
 import com.example.order.dto.ParamsDto;
 import com.example.order.util.Database;
 import com.example.order.util.ExceptionHandler;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,7 +15,7 @@ import java.util.List;
  * DAO to delete an order
  */
 public class DeleteOrderDao {
-    private Database database;
+    private final Database database;
 
     /**
      * Constructor
@@ -31,7 +32,7 @@ public class DeleteOrderDao {
      * @param paramsDto Object with the parameters for the operation
      * @return Number of orders deleted
      */
-    public int deleteOrdersById(ParamsDto paramsDto) {
+    public int deleteOrdersById(@NotNull ParamsDto paramsDto) {
         int numberResults = 0;
 
         try (Connection con = database.getConnection();
@@ -52,7 +53,7 @@ public class DeleteOrderDao {
      * @param orderIds IDs of the orders to delete
      * @return Delete SQL statement
      */
-    private String buildDeleteSql(List<Long> orderIds) {
+    private @NotNull String buildDeleteSql(@NotNull List<Long> orderIds) {
         String ids = String.join(",", Collections.nCopies(orderIds.size(), "?"));
 
         return "DELETE FROM orders o WHERE o.order_id IN (" + ids + ")";
@@ -61,12 +62,12 @@ public class DeleteOrderDao {
     /**
      * Creates a PreparedStatement object to delete one or more orders
      *
-     * @param con      Connnection object
+     * @param con      Connection object
      * @param orderIds Order IDs to set on the PreparedStatement
      * @return A PreparedStatement object
      * @throws SQLException In case of an error
      */
-    private PreparedStatement createPreparedStatement(Connection con, List<Long> orderIds) throws SQLException {
+    private PreparedStatement createPreparedStatement(@NotNull Connection con, List<Long> orderIds) throws SQLException {
         String sql = buildDeleteSql(orderIds);
         PreparedStatement ps = con.prepareStatement(sql);
 

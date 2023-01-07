@@ -8,6 +8,7 @@ import com.example.order.service.ServiceFactory;
 import com.example.order.util.Commands;
 import com.example.order.util.OrderStatus;
 import com.example.order.util.ValidationUtils;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -62,7 +63,7 @@ public class Main {
      *
      * @param args Arguments given to the application
      */
-    private static void processCommand(String args[]) {
+    private static void processCommand(String[] args) {
         String error = validateArgs(args);
 
         if (isEmpty(error)) {
@@ -89,7 +90,7 @@ public class Main {
      * @param args    Arguments of the command
      * @return Object with the information (arguments) to be processed
      */
-    private static ParamsDto getParameters(Commands cmdEnum, String[] args) {
+    private static @NotNull ParamsDto getParameters(Commands cmdEnum, String[] args) {
         ParamsDto paramsDTO = new ParamsDto();
 
         if (cmdEnum == Commands.GET) {
@@ -117,13 +118,13 @@ public class Main {
      *
      * @return Object with the information to insert an order
      */
-    private static OrderDto askForOrderDetails() {
+    private static @NotNull OrderDto askForOrderDetails() {
         OrderDto orderDTO = new OrderDto();
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         boolean invalidInput;
         try {
-            // Ask for customer ID
+            /* Ask for customer ID */
             do {
                 System.out.print("Customer ID: ");
                 String line = reader.readLine();
@@ -152,7 +153,7 @@ public class Main {
                     }
                 } while (invalidInput);
 
-                // Ask for product quantity
+                /* Ask for product quantity */
                 do {
                     System.out.print("Quantity: ");
                     String line = reader.readLine();
@@ -165,7 +166,7 @@ public class Main {
                 } while (invalidInput);
                 list.add(orderDetailDTO);
 
-                // Ask to insert more products
+                /* Ask to insert more products */
                 do {
                     System.out.print("Insert more products? (y/n): ");
                     String line = reader.readLine();

@@ -4,6 +4,7 @@ import com.example.order.dto.OrderDto;
 import com.example.order.dto.ParamsDto;
 import com.example.order.util.Database;
 import com.example.order.util.ExceptionHandler;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,8 +16,8 @@ import java.sql.SQLException;
  * DAO to get an order
  */
 public class GetOrderDao {
-    private String query = "SELECT * FROM orders o WHERE o.order_id = ?";
-    private Database database;
+    private final String query = "SELECT * FROM orders o WHERE o.order_id = ?";
+    private final Database database;
 
     /**
      * Constructor
@@ -38,17 +39,17 @@ public class GetOrderDao {
 
         try (Connection con = database.getConnection();
              PreparedStatement ps = createPreparedStatement(con, paramsDto.getOrderId());
-             ResultSet rs = createResultSet(ps);
+             ResultSet rs = createResultSet(ps)
         ) {
             if (rs.first()) {
                 orderDto = new OrderDto();
-                // 'order_id'
+                /* 'order_id' */
                 orderDto.setOrderId(rs.getLong(1));
-                // 'order_customer_id'
+                /* 'order_customer_id' */
                 orderDto.setCustomerId(rs.getLong(2));
-                // 'order_date'
+                /* 'order_date' */
                 orderDto.setDate(rs.getDate(3));
-                // 'order_status'
+                /* 'order_status' */
                 orderDto.setStatus(rs.getString(4));
             }
 
@@ -62,12 +63,12 @@ public class GetOrderDao {
     /**
      * Creates a PreparedStatement object to get an order
      *
-     * @param con     Connnection object
+     * @param con     Connection object
      * @param orderId Order ID to set on the PreparedStatement
      * @return A PreparedStatement object
      * @throws SQLException In case of an error
      */
-    private PreparedStatement createPreparedStatement(Connection con, long orderId) throws SQLException {
+    private @NotNull PreparedStatement createPreparedStatement(@NotNull Connection con, long orderId) throws SQLException {
         PreparedStatement ps = con.prepareStatement(query);
         ps.setLong(1, orderId);
         return ps;
@@ -80,8 +81,7 @@ public class GetOrderDao {
      * @return A ResultSet object
      * @throws SQLException In case of an error
      */
-    private ResultSet createResultSet(PreparedStatement ps) throws SQLException {
-        ResultSet rs = ps.executeQuery();
-        return rs;
+    private ResultSet createResultSet(@NotNull PreparedStatement ps) throws SQLException {
+        return ps.executeQuery();
     }
 }
